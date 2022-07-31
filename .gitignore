@@ -1,0 +1,4 @@
+.env
+
+local-data/cache/data
+local-data/db/data

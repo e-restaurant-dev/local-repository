@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:14.3
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./local-data/db/init-tables.sql:/docker-entrypoint-initdb.d/init-tables.sql
+      - ./local-data/db/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${PGDATABASE}
+      - POSTGRES_USER=${PGUSER}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+    networks:
+      - backend
+  cache:
+    image: redis:7.0.4-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./local-data/cache/data:/data
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSOWORD}
+    networks:
+      - backend
