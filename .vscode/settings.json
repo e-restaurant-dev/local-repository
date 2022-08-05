@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "e-rest-docker",
+            "username": "admin",
+            "database": "rest",
+            "password": "asda33f342ezc3FJASKjsfnv33"
+        }
+    ]
+}

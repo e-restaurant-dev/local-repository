@@ -2,7 +2,7 @@ CREATE TABLE restaurants (
     id INT GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
-)
+);
 
 CREATE TABLE restaurant_branch (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -12,7 +12,7 @@ CREATE TABLE restaurant_branch (
     currency VARCHAR(10) NOT NULL,
     country VARCHAR(255) NULL,
     city VARCHAR(255) NULL
-)
+);
 
 CREATE TABLE admin_users (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -20,17 +20,17 @@ CREATE TABLE admin_users (
     name VARCHAR(255) NULL,
     restaurant_id INT REFERENCES restaurants(id) NOT NULL,
     password VARCHAR(255) NOT NULL
-)
+);
 
 CREATE TABLE worker_rights (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title VARCHAR(255) NOT NULL
-)
+);
 
 CREATE TABLE worker_roles (
     title VARCHAR(255) PRIMARY KEY,
     rights INT[]
-)
+);
 
 CREATE TABLE worker_user (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -39,4 +39,4 @@ CREATE TABLE worker_user (
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     role VARCHAR(255) REFERENCES worker_roles(title)
-)
+);
