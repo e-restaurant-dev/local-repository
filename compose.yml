@@ -8,11 +8,11 @@ services:
       - ./local-data/db/init-tables.sql:/docker-entrypoint-initdb.d/init-tables.sql
       - ./local-data/db/data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=${PGDATABASE}
-      - POSTGRES_USER=${PGUSER}
-      - POSTGRES_PASSWORD=${PGPASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     networks:
-      - backend
+      - api-net
   cache:
     image: redis:7.0.4-alpine
     restart: always
@@ -20,6 +20,9 @@ services:
       - '6379:6379'
     volumes:
       - ./local-data/cache/data:/data
-    command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSOWORD}
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
     networks:
-      - backend
+      - api-net
+networks:
+  api-net:
+    driver: bridge
