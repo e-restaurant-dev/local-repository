@@ -13,6 +13,18 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     networks:
       - api-net
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    volumes:
+      - ./local-data/pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - api-net
   cache:
     image: redis:7.0.4-alpine
     restart: always
@@ -20,7 +32,7 @@ services:
       - '6379:6379'
     volumes:
       - ./local-data/cache/data:/data
-    command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
+    command: redis-server --requirepass ${REDIS_PASSWORD}
     networks:
       - api-net
 networks:

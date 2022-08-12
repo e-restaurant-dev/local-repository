@@ -18,7 +18,7 @@ CREATE TABLE admin_users (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
     name VARCHAR(255) NULL,
-    restaurant_id INT REFERENCES restaurants(id) NOT NULL,
+    restaurant_id INT REFERENCES restaurants(id),
     password VARCHAR(255) NOT NULL
 );
 
@@ -32,7 +32,7 @@ CREATE TABLE worker_roles (
     rights INT[]
 );
 
-CREATE TABLE worker_user (
+CREATE TABLE worker_users (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     branch_id INT REFERENCES restaurant_branch(id) NOT NULL,
     name VARCHAR(255),
